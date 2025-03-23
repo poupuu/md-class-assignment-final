@@ -81,7 +81,7 @@ def main():
     st.write('Data input by user')
     temp_df
 
-    temp_df = feature_encode(temp_df, label_encoder)
+    temp_df = encode(temp_df, label_encoder)
     
     #preprocess input data
     # df = target_encode(output_df, target_encoder)
