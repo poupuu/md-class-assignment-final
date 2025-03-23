@@ -24,7 +24,7 @@ def encode(input_df, label_encoders):
             input_df[column] = label_encoders[column].transform(input_df[column])
     return input_df
     
-def scaling(df):
+def scaling(df, standard_scaler, robust_scaler):
     for column in df.columns:
         if column == "Height":
             df[[column]] = standard_scaler.transform(df[[column]])
