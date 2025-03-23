@@ -16,18 +16,16 @@ def input_user_to_df(input):
     df = pd.DataFrame(data, columns = ['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight', 'FAVC', 'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE', 'CALC', 'MTRANS'])
     return df
 
-# from sklearn.preprocessing import LabelEncoder
-
 def encode(input_df, label_encoders):
     for column in input_df.columns:
         if input_df[column].dtype == 'object' or input_df[column].dtype.name == 'category':
             input_df[column] = label_encoders[column].transform(input_df[column])
     return input_df
 
-def scaling(input_df, robust_scaling):
+def scaling(input_df, robust_scalers):
     for column in input_df.columns:
         if input_df[column].dtype == 'int64' or input_df[column].dtype == 'float64':
-            input_df[column] = robust_scaling[column].transform(input_df[[column]])
+            input_df[column] = robust_scaler[column].transform(input_df[[column]])
     return input_df
 
 def predict_model(model, user_input):
@@ -92,7 +90,7 @@ def main():
     user_input
     user_input = encode(user_input, label_encoder)
     user_input
-    user_input = scaling(user_input, robust_scaling)
+    user_input = scaling(user_input, robust_scaler)
     user_input
     
     #preprocess input data
