@@ -9,7 +9,7 @@ from sklearn.preprocessing import RobustScaler
 #load .pkl
 label_encoder = joblib.load("label_encoder.pkl")
 standard_scaler = joblib.load("standard_scaler.pkl")
-robust_scaler = joblib.load("robust_scaler-2.pkl")
+robust_scaler = joblib.load("scaler.pkl")
 model = joblib.load("fine_tuned_model.pkl")
 
 def input_user_to_df(input):
