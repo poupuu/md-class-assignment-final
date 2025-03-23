@@ -64,6 +64,7 @@ def main():
     CH2O = st.slider('CH2O', min_value = 1, max_value = 3, value = 2)
     FAF = st.slider('FAF', min_value = 0, max_value = 3, value = 1)
     TUE = st.slider('TUE', min_value = 0, max_value = 2, value = 1)
+    
     #categorical
     Gender = st.selectbox('Gender', ('Male', 'Female'))
     family_history_with_overweight = st.selectbox('Family history with overweight', ('yes', 'no'))
@@ -75,13 +76,20 @@ def main():
     MTRANS = st.selectbox('MTRANS', ('Public_Transportation', 'Automobile', 'Walking', 'Motorbike', 'Bike'))
     
     #input data to df
+    #numerical
+    
+    
+    #categorical
+    numerical_columns = ["Age", "Height", "Weight", "FCVC", "NCP", "CH2O", "FAF", "TUE"] #configurable
+    categorical_columns = ["Gender", "family_history_with_overweight", "FAVC", "CAEC", "SMOKE", "SCC", "CALC", "MTRANS"] #configurable
+    
     user_input = [Gender, Age, Height, Weight, family_history_with_overweight, FAVC, FCVC, NCP, CAEC, SMOKE, CH2O, SCC, FAF, TUE, CALC, MTRANS]
-    temp_df = input_user_to_df(user_input)
 
     st.write('Data input by user')
     temp_df
 
-    temp_df = encode(temp_df, label_encoder)
+    user_input_encoded = encode(user_input, label_encoder)
+    st.table(user_input_encoded)
     
     #preprocess input data
     # df = target_encode(output_df, target_encoder)
