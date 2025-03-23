@@ -30,7 +30,7 @@ def encode(input_df, label_encoders):
 #     return input_df
 
 def norma(input_df):
-    input_df = robust_scaler.transform(df)
+    input_df = robust_scaler.transform(input_df)
     return input_df
 
 def predict_model(model, user_input):
