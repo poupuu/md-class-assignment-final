@@ -87,8 +87,8 @@ def main():
     user_input = input_user_to_df(user_input)
     st.write('Data input by user')
     user_input
-    user_input_encoded = encode(user_input, label_encoder)
-    st.table(user_input_encoded)
+    user_input = encode(user_input, label_encoder)
+    user_input
     
     #preprocess input data
     # df = target_encode(output_df, target_encoder)
