@@ -4,6 +4,7 @@
 import pandas as pd
 import streamlit as st
 import joblib
+from sklearn.preprocessing import RobustScaler 
 
 #load .pkl
 label_encoder = joblib.load("label_encoder.pkl")
