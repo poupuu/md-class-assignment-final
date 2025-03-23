@@ -95,7 +95,7 @@ def main():
     df
     df = encode(df, label_encoder)
     df
-    df = scaling(df, robust_scaler[user_input])
+    df = scaling(df, robust_scaler)
     df
 
 
