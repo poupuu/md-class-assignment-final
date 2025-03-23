@@ -16,12 +16,14 @@ def input_user_to_df(input):
     df = pd.DataFrame(data, columns = ['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight', 'FAVC', 'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE', 'CALC', 'MTRANS'])
     return df
 
-def encode(input_df, label_encoder):
+from sklearn.preprocessing import LabelEncoder
+
+def encode(input_df, label_encoders):
     for column in input_df.columns:
-        if column in input_df.columns == d.type[categorical] == "object / "str"):
-        input_df[column] = label_encoder[column].transform(input_df[column])
-    return df
-  
+        if input_df[column].dtype == 'object' or input_df[column].dtype.name == 'category':
+            input_df[column] = label_encoders[column].transform(input_df[column])
+    return input_df
+    
 def scaling(df):
     for column in df.columns:
         if column == "Height":
