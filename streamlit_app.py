@@ -1,5 +1,5 @@
 #manual mapping buat target variable
-
+import pandas as pd
 import streamlit as st
 import joblib
 
