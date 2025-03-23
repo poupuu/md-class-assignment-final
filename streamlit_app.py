@@ -80,13 +80,13 @@ def main():
     
     
     #categorical
-    numerical_columns = ["Age", "Height", "Weight", "FCVC", "NCP", "CH2O", "FAF", "TUE"] #configurable
-    categorical_columns = ["Gender", "family_history_with_overweight", "FAVC", "CAEC", "SMOKE", "SCC", "CALC", "MTRANS"] #configurable
+    # numerical_columns = ["Age", "Height", "Weight", "FCVC", "NCP", "CH2O", "FAF", "TUE"] #configurable
+    # categorical_columns = ["Gender", "family_history_with_overweight", "FAVC", "CAEC", "SMOKE", "SCC", "CALC", "MTRANS"] #configurable
     
     user_input = [Gender, Age, Height, Weight, family_history_with_overweight, FAVC, FCVC, NCP, CAEC, SMOKE, CH2O, SCC, FAF, TUE, CALC, MTRANS]
 
     st.write('Data input by user')
-    user_input
+    user_input_
 
     user_input_encoded = encode(user_input, label_encoder)
     st.table(user_input_encoded)
