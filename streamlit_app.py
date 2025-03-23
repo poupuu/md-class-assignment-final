@@ -33,7 +33,7 @@ def encode(input_df, label_encoders):
 #                 input_df[column] = robust_scaler[column].transform(input_df[column])
 #     return df
 
-def scaling(df, standard_scaler, robust_scaler):
+def scaling(input_df, standard_scaler, robust_scaler):
     for column in input_df.columns:
         if input_df[column].dtype == 'int64' or input_df[column].dtype == 'float64':
             if column == "Height":
