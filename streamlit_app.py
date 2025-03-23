@@ -90,7 +90,7 @@ def main():
     st.write('Data input by user')
     user_input
     user_input = encode(user_input, label_encoder)
-    user_input
+    print(user_input)
     
     user_input.RobustScaler(user_input)
     print(user_input)    
