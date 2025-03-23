@@ -133,66 +133,51 @@
 # if __name__ == "__main__":
 #     main()
 
-
-
 import pandas as pd
 import streamlit as st
 import joblib
-from sklearn.preprocessing import RobustScaler, LabelEncoder
+from sklearn.preprocessing import RobustScaler
 
-# Load Model dan Scaler
-label_encoder = joblib.load("label_encoder.pkl")
-standard_scaler = joblib.load("standard_scaler.pkl")
+# Load pre-trained models and scalers
+label_encoders = joblib.load("label_encoder.pkl")  # Pastikan ini dictionary {column_name: encoder}
 robust_scaler = joblib.load("robust_scaler-2.pkl")
 model = joblib.load("fine_tuned_model.pkl")
 
-# Fungsi untuk mengubah input user menjadi dataframe
+# Function to convert user input to DataFrame
 def input_user_to_df(user_input):
-    df = pd.DataFrame([user_input], columns=[
-        'Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight',
-        'FAVC', 'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE', 'CALC', 'MTRANS'
-    ])
+    columns = ['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight', 
+               'FAVC', 'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 
+               'FAF', 'TUE', 'CALC', 'MTRANS']
+    df = pd.DataFrame([user_input], columns=columns)
     return df
 
-# Fungsi encoding untuk variabel kategori
-def encode(input_df, label_encoder):
-    categorical_columns = ['Gender', 'family_history_with_overweight', 'FAVC', 
-                           'CAEC', 'SMOKE', 'SCC', 'CALC', 'MTRANS']
-    
-    for column in categorical_columns:
-        input_df[column] = label_encoder.fit_transform(input_df[column])
+# Encode categorical features
+def encode(input_df, label_encoders):
+    for column in input_df.columns:
+        if input_df[column].dtype == 'object':
+            if column in label_encoders:
+                input_df[column] = label_encoders[column].transform(input_df[column])
+            else:
+                st.error(f"Encoder for column {column} not found!")
     return input_df
 
-# Fungsi scaling untuk variabel numerik
+# Scale numerical features
 def scaling(input_df, robust_scaler):
     numeric_columns = ['Age', 'Height', 'Weight', 'FCVC', 'NCP', 'CH2O', 'FAF', 'TUE']
-    
     input_df[numeric_columns] = robust_scaler.transform(input_df[numeric_columns])
     return input_df
 
-# Fungsi untuk melakukan prediksi
+# Predict function
 def predict_model(model, user_input):
     prediction = model.predict(user_input)
-    return prediction[0] if len(prediction) > 0 else prediction
+    return prediction[0] if len(prediction) > 0 else None
 
-# Main Function untuk Streamlit
+# Streamlit App
 def main():
-    st.title("Machine Learning App - Obesity Prediction")
-    st.info("This app predicts your obesity level based on your input!")
+    st.title("Machine Learning App")
+    st.info("This app will predict your obesity level!")
 
-    # Load Data dan Tampilkan
-    with st.expander("**Dataset Preview**"):
-        df = pd.read_csv("ObesityDataSet_raw_and_data_sinthetic.csv")
-        st.write(df.head())
-
-    # Data Visualization
-    with st.expander('**Data Visualization**'):
-        st.scatter_chart(data=df, x='Height', y='Weight', color='NObeyesdad')
-
-    # Input User
-    st.subheader("User Input")
-    
-    # Input Numerical Features
+    # User input (numerical)
     Age = st.slider('Age', min_value=14, max_value=61, value=24)
     Height = st.slider('Height', min_value=1.45, max_value=1.98, value=1.7)
     Weight = st.slider('Weight', min_value=39, max_value=173, value=86)
@@ -201,8 +186,8 @@ def main():
     CH2O = st.slider('CH2O', min_value=1, max_value=3, value=2)
     FAF = st.slider('FAF', min_value=0, max_value=3, value=1)
     TUE = st.slider('TUE', min_value=0, max_value=2, value=1)
-    
-    # Input Categorical Features
+
+    # User input (categorical)
     Gender = st.selectbox('Gender', ('Male', 'Female'))
     family_history_with_overweight = st.selectbox('Family history with overweight', ('yes', 'no'))
     FAVC = st.selectbox('FAVC', ('yes', 'no'))
@@ -212,22 +197,23 @@ def main():
     CALC = st.selectbox('CALC', ('Sometimes', 'no', 'Frequently', 'Always'))
     MTRANS = st.selectbox('MTRANS', ('Public_Transportation', 'Automobile', 'Walking', 'Motorbike', 'Bike'))
 
-    # Proses Input User ke DataFrame
+    # Convert input to DataFrame
     user_input = [Gender, Age, Height, Weight, family_history_with_overweight, 
                   FAVC, FCVC, NCP, CAEC, SMOKE, CH2O, SCC, FAF, TUE, CALC, MTRANS]
-    
-    user_input = input_user_to_df(user_input)
-    st.write("User Input Data:")
-    st.write(user_input)
+    user_input_df = input_user_to_df(user_input)
+    st.write('User Input:')
+    st.dataframe(user_input_df)
 
-    # Preprocessing Data
-    user_input = encode(user_input, label_encoder)
-    user_input = scaling(user_input, robust_scaler)
+    # Encode categorical data
+    user_input_encoded = encode(user_input_df, label_encoders)
 
-    # Prediksi Model
+    # Scale numerical data
+    user_input_scaled = scaling(user_input_encoded, robust_scaler)
+
+    # Predict
     if st.button("Predict"):
-        prediction = predict_model(model, user_input)
-        st.success(f"The predicted obesity level is: **{prediction}**")
+        prediction = predict_model(model, user_input_scaled)
+        st.write(f"Predicted Obesity Level: **{prediction}**")
 
 if __name__ == "__main__":
     main()
