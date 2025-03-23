@@ -91,8 +91,8 @@ def main():
     user_input
     user_input = encode(user_input, label_encoder)
     user_input
-    user_input = scaling(user_input, robust_scaler)
-    print(user_input)
+    user_input = scaling(input_df, robust_scaler)
+    print(input_df)
     
     #preprocess input data
     # df = target_encode(output_df, target_encoder)
