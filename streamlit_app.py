@@ -93,6 +93,7 @@ def main():
     user_input
     
     user_input.RobustScaler()
+    print(user_input)    
     user_input = scaling(user_input, robust_scaler)
     print(user_input)
     
