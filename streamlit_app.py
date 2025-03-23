@@ -91,7 +91,6 @@ def main():
     user_input
     user_input = encode(user_input, label_encoder)
     print(user_input)
-    print(input_df.columns)
 
     user_input = 
     user_input = user_input.robust_scaler(user_input)
