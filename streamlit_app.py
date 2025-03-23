@@ -25,8 +25,8 @@ def encode(input_df, label_encoders):
 
 def scaling(input_df, robust_scaler):
     for column in input_df.columns:
-        if input_df[column].dtype in ['int64', 'float64']:
-            input_df[[column]] = robust_scaler.transform(input_df[[column]])
+        # if input_df[column].dtype in ['int64', 'float64']:
+        input_df[column] = robust_scaler.transform(input_df[[column]])
     return input_df
 
 def predict_model(model, user_input):
@@ -91,7 +91,9 @@ def main():
     user_input
     user_input = encode(user_input, label_encoder)
     print(user_input)
-    
+    input_df.columns
+
+    user_input = 
     user_input = user_input.robust_scaler(user_input)
     print(user_input)    
     user_input = scaling(user_input, robust_scaler)
