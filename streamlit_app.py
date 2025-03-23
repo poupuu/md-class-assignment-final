@@ -34,28 +34,12 @@ def encode(input_df, label_encoders):
 #     return df
 
 def scaling(df, standard_scaler, robust_scaler):
-    """
-    Scale numerical columns in the DataFrame using StandardScaler and RobustScaler.
-    :param df: Input DataFrame containing both numerical and categorical columns.
-    :param standard_scaler: StandardScaler object for scaling the "Height" column.
-    :param robust_scaler: RobustScaler object for scaling other numerical columns.
-    :return: Scaled DataFrame with numerical columns transformed.
-    """
-    # Iterate through all columns in the DataFrame
-    for column in df.columns:
-        # Check if the column is numerical (dtype == 'int64' or 'float64')
-        if df[column].dtype == 'int64' or df[column].dtype == 'float64':
-            try:
-                # Apply StandardScaler to the "Height" column
-                if column == "Height":
-                    df[column] = standard_scaler.transform(df[[column]])
-                # Apply RobustScaler to other numerical columns
-                else:
-                    df[column] = robust_scaler.transform(df[[column]])
-            except Exception as e:
-                print(f"Error scaling column '{column}': {e}")
-                raise
-    
+    for column in input_df.columns:
+        if input_df[column].dtype == 'int64' or input_df[column].dtype == 'float64':
+            if column == "Height":
+                input_df[column] = standard_scaler.transform(input_df[[column]])
+            else:
+                input_df[column] = robust_scaler.transform(input_df[[column]])
     return df
 
 def predict_model(model, user_input):
