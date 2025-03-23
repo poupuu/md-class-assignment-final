@@ -90,7 +90,8 @@ def main():
     st.write('Data input by user')
     user_input
     user_input = encode(user_input, label_encoder)
-    print(user_input)
+    user_input
+
 
 
     #preprocess input data
