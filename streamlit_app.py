@@ -89,7 +89,7 @@ def main():
     df = input_user_to_df(user_input)
     st.write('Data input by user')
     df
-    df = encode(df)
+    df = encode(df, label_encoder)
     df
     df = scaling(df, robust_scaler)
     df
