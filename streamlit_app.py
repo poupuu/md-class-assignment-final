@@ -1,4 +1,6 @@
+#fix encode function
 #manual mapping buat target variable
+
 import pandas as pd
 import streamlit as st
 import joblib
@@ -16,6 +18,7 @@ def input_user_to_df(input):
 
 def encode(input_df, label_encoder):
     for column in input_df.columns:
+        if column in input_df.columns == d.type[categorical] == "object / "str"):
         input_df[column] = label_encoder[column].transform(input_df[column])
     return df
   
