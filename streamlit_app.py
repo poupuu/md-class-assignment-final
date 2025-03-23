@@ -86,7 +86,7 @@ def main():
     user_input = [Gender, Age, Height, Weight, family_history_with_overweight, FAVC, FCVC, NCP, CAEC, SMOKE, CH2O, SCC, FAF, TUE, CALC, MTRANS]
 
     st.write('Data input by user')
-    st.table(user_input)
+    st.table(user_input, axis = 1)
     user_input_encoded = encode(user_input, label_encoder)
     st.table(user_input_encoded)
     
