@@ -91,7 +91,7 @@ def main():
     user_input
     user_input = encode(user_input, label_encoder)
     user_input
-    user_input = norma(user_input, robust_scaler)
+    user_input = scaling(user_input, robust_scaler)
     print(user_input)
     
     #preprocess input data
