@@ -11,7 +11,6 @@ label_encoder = joblib.load("label_encoder.pkl")
 standard_scaler = joblib.load("standard_scaler.pkl")
 scaling = joblib.load("robust_scaler-2.pkl")
 model = joblib.load("fine_tuned_model.pkl")
-robust_scaler = RobustScaler()
 
 def input_user_to_df(input):
     data = [input]
