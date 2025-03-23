@@ -86,7 +86,7 @@ def main():
     # categorical_columns = ["Gender", "family_history_with_overweight", "FAVC", "CAEC", "SMOKE", "SCC", "CALC", "MTRANS"] #configurable
     
     user_input = ["Gender", "Age", "Height", "Weight", "family_history_with_overweight", "FAVC", "FCVC", "NCP", "CAEC", "SMOKE", "CH2O", "SCC", "FAF", "TUE", "CALC", "MTRANS"]
-    user_input = input_user_to_df(user_input)
+    df = input_user_to_df(user_input)
     st.write('Data input by user')
     df
     user_input = encode(user_input, label_encoder)
