@@ -16,12 +16,7 @@ def input_user_to_df(input):
 
 def encode(input_df, label_encoder):
     for column in input_df.columns:
-        if column in label_encoder: 
-            try:
-                input_df[column] = label_encoder[column].transform(input_df[column])
-            except Exception as e:
-                st.error(f"Error encoding column '{column}': {e}")
-                raise
+        input_df[column] = label_encoder[column].transform(input_df[column])
     return df
   
 def scaling(df):
