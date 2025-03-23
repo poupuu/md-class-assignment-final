@@ -7,7 +7,7 @@ import joblib
 from sklearn.preprocessing import RobustScaler 
 
 #load .pkl
-label_encoder = joblib.load("label_encoder-2.pkl")
+label_encoder = joblib.load("label_encoder.pkl")
 standard_scaler = joblib.load("standard_scaler.pkl")
 robust_scaler = joblib.load("robust_scaler-2.pkl")
 model = joblib.load("fine_tuned_model.pkl")
