@@ -28,7 +28,7 @@ def scaling(input_df, standard_scaler, robust_scaler):
     for column in input_df.columns:
         if input_df[column].dtype == 'int64' or input_df[column].dtype == 'float64':
             if column == "Height":
-                input_df[column] = standard_scaler.transform(input_df[[column]])
+                input_df["Height"] = standard_scaler.transform(input_df[[column]])
             else:
                 input_df[column] = robust_scaler.transform(input_df[[column]])
     return input_df
