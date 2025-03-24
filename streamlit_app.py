@@ -28,6 +28,7 @@ def encode(input_df, label_encoders):
 #         if df[column].dtype == 'int64' or df[column].dtype.name == 'float64':
 #             df[column] = robust_scaler[column].transform(df[column])
 #     return df
+
 def scaling(df, robust_scaler):
     numeric_columns = df.select_dtypes(include=['int64', 'float64']).columns  # Pilih kolom numerik
     df[numeric_columns] = robust_scaler.transform(df[numeric_columns])  # Transform langsung
